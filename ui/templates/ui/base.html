@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prop Bets Pool</title>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'ui/style.css' %}" />
+</head>
+<body>
+
+<header class="header">
+  <p id="slogan">Prop Bets Pool</p>
+</header>
+
+<div id="sticky-main-nav">
+    {% if user.is_authenticated %}
+    <div class="nav-block">
+      <a href="/ui/main">🏠<span class="nav-text">Home</span></a>
+    </div
+    ><div class="nav-block">
+      <a href="/accounts/logout/">🔒<span class="nav-text">Logout</span></a>
+    </div
+    >
+    {% else %}
+    <div class="nav-block">
+      <a href="/ui/signup">📝<span class="nav-text">Signup</span></a>
+    </div
+    ><div class="nav-block">
+      <a href="{% url 'login'%}?next=/">🔓<span class="nav-text">Login</span></a>
+    </div>
+    {% endif %}
+</div>
+
+<div id="content-block">
+  <p id="message-box">{{ message }}</p>
+  {% block content %}
+  {% endblock %}
+</div>
+
+<footer class="footer">
+  <p class="info">Free and unencumbered software for the public domain. <a href="https://unlicense.org/">More info here.</a></p>
+</footer>
+
+</body>
+</html>

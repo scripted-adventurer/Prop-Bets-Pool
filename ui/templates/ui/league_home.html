@@ -1,0 +1,16 @@
+{% extends "ui/base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<p class="section-header">{{ league.name }}</p>
+
+<button type="button"><a href="/ui/league/picks/{{ league.name }}">Update Picks</a></button>
+<button type="button"><a href="/ui/league/scoreboard/{{ league.name }}">View Scoreboard</a></button>
+
+{% if admin %}
+<button type="button"><a href="/ui/league/answers/{{ league.name }}">Update Answers</a></button> 
+{% else %}{% endif %}
+
+{% endblock %}

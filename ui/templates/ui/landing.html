@@ -1,0 +1,15 @@
+{% extends "ui/base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<p class="section-header">My Leagues:</p>
+{% for league in leagues %}
+<p><a href="/ui/league/home/{{ league }}">{{ league }}</a></p>
+{% endfor %}
+
+<button type="button"><a href="/ui/league/join">Join a League</a></button>
+<button type="button"><a href="/ui/league/create">Create a League</a></button>
+
+{% endblock %}

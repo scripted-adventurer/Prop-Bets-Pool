@@ -1,0 +1,23 @@
+{% extends "ui/base.html" %}
+
+{% block content %}
+  <h2>Sign Up</h2>
+  <p class="help-text">
+    Username can only contain letters, digits, and @ . + - _<br><br>
+    Email is optional<br><br>
+    Standard password rules apply: 8 characters, can't contain username, can't be a commonly used password. 
+  </p>
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% for error in field.errors %}
+          <p class="error">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    <button type="submit">Sign up</button>
+  </form>
+{% endblock %}

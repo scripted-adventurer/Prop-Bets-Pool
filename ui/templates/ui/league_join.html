@@ -1,0 +1,16 @@
+{% extends "ui/base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<p class="section-header">Join League</p>
+
+<form action="{% url 'ui:league_join_submit' %}" method="post">
+  {% csrf_token %}
+  League Name:<br><input type="text" name="leagueName" required="required"><br>
+  Password:<br><input type="text" name="leaguePassword" required="required"><br>
+  <input type="submit" value="Submit">
+</form>
+
+{% endblock %}

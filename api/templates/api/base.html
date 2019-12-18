@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prop Bets Pool</title>
+  {% load static %}
+  <script src="{% static 'api/utility.js' %}"></script>
+  <script src="{% static 'api/redirect.js' %}"></script>
+  <script src="{% static 'api/view.js' %}"></script>
+  <script src="{% static 'api/main.js' %}"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'api/style.css' %}" />
+</head>
+<body>
+
+<header class="header">
+  <p id="slogan">Prop Bets Pool</p>
+</header>
+
+<div id="sticky-main-nav">
+    <!-- Displayed when user is authenticated -->
+    <div id="auth-header">
+      <div class="nav-block">
+        <a href="/#/landing">🏠<span class="nav-text">Home</span></a>
+      </div
+      ><div class="nav-block">
+        <a href="/#/logout">🔒<span class="nav-text">Logout</span></a>
+      </div>
+    </div>
+    <!-- Displayed when user is not authenticated -->
+    <div id="not-auth-header">
+      <div class="nav-block">
+        <a href="/#/signup">📝<span class="nav-text">Signup</span></a>
+      </div
+      ><div class="nav-block">
+        <a href="/#/login">🔓<span class="nav-text">Login</span></a>
+      </div>
+    </div>
+</div>
+
+<div id="content-block">
+
+<div id="message-box">
+  <p id="message">Test message goes here!</p>
+</div>
+
+<div id="main-page" class="hideable">
+  <p>Welcome to the Prop Bets Pool! Inspired by a Super Bowl prop bets pool, this platform lets you and your friends compete against each other by answering the same series of True or False questions.</p>
+  <p>The designated administrator of the group is responsible for creating the league, writing the prop bets (a series of True or False questions) and tracking the correct answer to each prop bet.</p>
+  <p>Each player who joins the league will submit their picks for each prop bet. As the answers for each prop bet are updated, the scoreboard page tracks how well each player is doing.</p>
+  <p>The landing page shows the league(s) you (as the signed-in user) are in, and has links to join an existing league or create a new one.</p>
+</div>
+
+<div id="signup" class="hideable">
+  <form action="/#/signup/submit" id="signup-form" method="post">
+    {% csrf_token %}
+    Username:<br><input type="text" name="username" required="required"><br>
+    Email:<br><input type="text" name="email" required="required"><br>
+    Password:<br><input type="password" name="password1" required="required"><br>
+    Password (re-enter):<br><input type="password" name="password2" required="required"><br>
+    <input type="submit" value="Submit" class="form-submit">
+  </form>
+</div>  
+
+<div id="login" class="hideable">
+  <form action="/#/login/submit" id="login-form" method="post">
+    Username:<br><input type="text" name="username" required="required"><br>
+    Password:<br><input type="password" name="password" required="required"><br>
+    <input type="submit" value="Submit" class="form-submit">
+  </form>
+</div>
+
+<div id="landing" class="hideable">
+  <p class="section-header">My Leagues:</p>
+  <div id="leagues-list"></div>
+  <button type="button"><a href="/#/league/join">Join a League</a></button>
+  <button type="button"><a href="/#/league/create">Create a League</a></button>
+</div>
+
+<div id="league-join" class="hideable">
+  <p class="section-header">Join League</p>
+  <form action="/#/league/join/submit" id="league-join-form" method="post">
+    League Name:<br><input type="text" name="leagueName" required="required"><br>
+    Password:<br><input type="text" name="leaguePassword" required="required"><br>
+    <input type="submit" value="Submit" class="form-submit">
+  </form>
+</div>
+
+<div id="league-create" class="hideable">
+  <p class="section-header">Create League</p>
+  <form action="/#/league/create/submit" id="league-create-form" method="post">
+    League Name:<br><input type="text" name="leagueName" required="required"><br>
+    Password:<br><input type="text" name="leaguePassword" required="required"><br>
+    Prop Bets:<br><textarea name="propBets" rows="10" cols="50" required="required"></textarea><br>
+    <input type="submit" value="Submit" class="form-submit">
+  </form>
+</div>
+
+<div id="league-home" class="hideable">
+  <p class="section-header" id="league-name"></p>
+  <button type="button"><a href="" id="picks-button">Update Picks</a></button>
+  <button type="button"><a href="" id="scoreboard-button">View Scoreboard</a></button>
+  <div id="answers-button-container"></div>
+</div>
+
+<div id="league-answers" class="hideable">
+  <p class="section-header">Update Answers</p>
+  <input type="hidden" value="" id="league-answers-name">
+  <form action="/#/league/answers/submit" id="league-answers-form" method="post">
+    <div id="answers-container"></div>
+    <input type="submit" value="Submit" class="form-submit">
+  </form>
+</div>
+
+<div id="league-picks" class="hideable">
+  <p class="section-header">Update Picks</p>
+  <input type="hidden" value="" id="league-picks-name">
+  <form action="/#/league/picks/submit" id="league-picks-form" method="post">
+    <div id="picks-container"></div>
+    <input type="submit" value="Submit" class="form-submit">
+  </form>
+</div>
+
+<div id="league-scoreboard" class="hideable">
+  <p class="section-header">Scoreboard</p>
+  <table class="scoreboard" id="scoreboard-table">
+  </table>
+</div>
+
+<div id="not-found" class="hideable">
+  <p class="section-header">Error 404: Page Not Found</p>
+  <p>The requested page does not exist.</p>
+</div>
+
+</div>
+
+<footer class="footer">
+  <p class="info">Free and unencumbered software for the public domain. <a href="https://unlicense.org/">More info here.</a></p>
+</footer>
+
+</body>
+</html>

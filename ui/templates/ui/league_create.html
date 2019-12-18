@@ -1,0 +1,17 @@
+{% extends "ui/base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<p class="section-header">Create League</p>
+
+<form action="{% url 'ui:league_create_submit' %}" method="post">
+  {% csrf_token %}
+  League Name:<br><input type="text" name="leagueName" required="required"><br>
+  Password:<br><input type="text" name="leaguePassword" required="required"><br>
+  Prop Bets:<br><textarea name="propBetList" rows="10" cols="50" required="required"></textarea><br>
+  <input type="submit" value="Submit">
+</form>
+
+{% endblock %}

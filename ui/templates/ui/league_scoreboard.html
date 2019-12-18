@@ -1,0 +1,22 @@
+{% extends "ui/base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<p class="section-header">League Scoreboard</p>
+
+<table class="scoreboard">
+  <tr>
+      <th>Username</th>
+      <th>Score</th>
+  </tr>
+  {% for entry in scores %}
+  <tr>
+    <td>{{ entry.username }}</td>
+    <td>{{ entry.score }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

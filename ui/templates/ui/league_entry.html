@@ -1,0 +1,23 @@
+{% extends "ui/base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<p class="section-header">Update {% if answers %}Answers{% else %}Picks{% endif %}</p>
+
+{% if answers %}
+<form action="{% url 'ui:league_answers_submit' %}" method="post">
+{% else %}
+<form action="{% url 'ui:league_picks_submit' %}" method="post">{% endif %}
+  {% csrf_token %}
+  <input type="hidden" name="league_name" value="{{ league_name }}">
+  {% for prop_bet, response in prop_bets.items %}
+  <p>
+    {{ prop_bet }}<input type="radio" id="{{ prop_bet }}-true" name="{{ prop_bet }}" value="true" {% if response %}checked="checked"{% else %}{% endif %}><label for="{{ prop_bet }}-true">True</label><input type="radio" id="{{ prop_bet }}-false" name="{{ prop_bet }}" value="false" {% if not response %}checked="checked"{% else %}{% endif %}><label for="{{ prop_bet }}-false">False</label>
+  </p>
+  {% endfor %}
+  <input type="submit" value="Submit">
+</form>
+
+{% endblock %}
