@@ -2,30 +2,23 @@ API Guide
 
 Signup
 /api/signup
-Takes a username, optional email, and two passwords and tries to create an 
-account for the user. Returns an error if the username is already taken or if the
-passwords don't match.
+Takes a username, optional email, and two passwords and tries to create an account for the user. Returns an error if the username is already taken or if the passwords don't match.
 input: {'username': '', 'email': '', 'password1': '', 'password2': ''}
 output: {'success': true}
 
 Login
 /api/login
-Takes a username and password and logs in the user. Note that all other 
-elements of the API require a user to be authenticated, so this call must be 
-made prior to any others.
+Takes a username and password and logs in the user. Note that all other elements of the API require a user to be authenticated, so this call must be made prior to any others.
 input: {'username': '', 'password': ''}
 output: {'success': true}
 
-Login
+Logout
 /api/logout
-Takes no parameters. Logs out the requesting user. No error is returned if the
-user is not authenticated.
+Takes no parameters. Logs out the requesting user. No error is returned if the user is not authenticated.
 input: {'username': '', 'password': ''}
 output: {'success': true}
 
-** Note that for all the below, if the user is not authenticated, the call will
-return HTTP 401 and an error message. If any of the required parameters are 
-missing, the call will return HTTP 400 and an error message. **
+** Note that for all the below, if the user is not authenticated, the call will return HTTP 401 and an error message. If any of the required parameters are missing, the call will return HTTP 400 and an error message. **
 
 User - get all leagues
 /api/user/leagues
@@ -35,67 +28,54 @@ output: {'success': true, 'leagues': ['league_name_1', 'league_name_2']}
 
 League - create new
 /api/league/create
-Takes a league name, password, and prop bet list and creates a new league. 
-Returns an error if the league name is already taken. 
+Takes a league name, password, and prop bet list and creates a new league. Returns an error if the league name is already taken. 
 input: {'league_name': '', 'password': '', 'prop_bets': ['Total INTs over 4.5', 
 'Game length over 4 hours.']}
 output: {'success': true}
 
 League - join (create new Member)
 /api/league/join
-Takes a league name and password and adds the associated user to the league. 
-Returns an error if the league name and password do not match.
+Takes a league name and password and adds the associated user to the league. Returns an error if the league name and password do not match.
 input: {'league_name': '', 'password': ''}
 output: {'success': true}
 
 League - get prop bets
 /api/league/prop-bets
-Takes a league name and returns a list of all prop bet titles associated with 
-the league. Returns an error if the league name is not valid or if the 
-requesting user is not a member of the league. 
+Takes a league name and returns a list of all prop bet titles associated with the league. Returns an error if the league name is not valid or if the requesting user is not a member of the league. 
 input: {'league_name': ''}
 output: {'success': true, 'prop_bets': ['Total INTs over 4.5', 
 'Game length over 4 hours.']}
 
 League - edit answers
 /api/league/answers
-Takes a league name and answers object mapping prop bet titles to their 
-associated answers and updates the prop bets' answers. Returns an error if the 
-requesting user is not the admin of the league.
+Takes a league name and answers object mapping prop bet titles to their associated answers and updates the prop bets' answers. Returns an error if the requesting user is not the admin of the league.
 input: {'league_name': '', 'answers': {'Total INTs over 4.5': false, 
 'Game length over 4 hours.': true}}
 output: {'success': true}
 
 League - get scoreboard
 /api/league/scoreboard
-Takes a league name and returns a list of (username, total points) pairs. 
-Returns an error if the requesting user is not a member of the league. 
+Takes a league name and returns a list of (username, total points) pairs. Returns an error if the requesting user is not a member of the league. 
 input: {'league_name': ''}
 output: {'success': true, 'scoreboard': [{'username': user_1', 'score': 3}, 
 {'username': 'user_2', 'score': 1}, {'username': 'user_3', 'score': 0}]}
 
 Member - get
 /api/member/admin
-Takes a league name and returns whether or not the user is an admin of that 
-league. Returns an error if the league is invalid or the user is not part of 
-that league.
+Takes a league name and returns whether or not the user is an admin of that league. Returns an error if the league is invalid or the user is not part of that league.
 input: {'league_name': ''}
 output: {'success': true, 'admin': False}
 
 Member - get picks
 /api/member/picks/get
-Takes a league name and returns a picks object mapping prop bet titles to the
-picks made by the associated user in that league. Returns an error if the 
-requesting user is not a member of the league. 
+Takes a league name and returns a picks object mapping prop bet titles to the picks made by the associated user in that league. Returns an error if the requesting user is not a member of the league. 
 input: {league_name': ''}
 output: {'success': true, 'picks': {'Total INTs over 4.5': false, 
 'Game length over 4 hours.': false}}
 
 Member - update picks
 /api/member/picks/update
-Takes a league name and picks object mapping prop bet titles to the picks made by
-the requesting user. Returns an error if the requesting user is not a member of 
-the league. 
+Takes a league name and picks object mapping prop bet titles to the picks made by the requesting user. Returns an error if the requesting user is not a member of the league. 
 input: {league_name': '', 'picks': {'Total INTs over 4.5': false, 
 'Game length over 4 hours.': false}}
 output: {'success': true}
